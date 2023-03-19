@@ -18,10 +18,9 @@ let counter = 0
 
 function rps(playerSelection, computerSelection) {
 
-    computerSelection = getComputerChoice()
+    computerSelection = getComputerChoice();
 
-    playerSelection = prompt("Enter \"Rock\", \"Paper\", or \"Scissors!\"", "Rock");
-
+    
     if (playerSelection.toLowerCase() === "rock" && computerSelection === "Scissors") {
 
         counter = ++counter;
@@ -70,11 +69,63 @@ function rps(playerSelection, computerSelection) {
 
 
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(rps());
-        console.log(counter);
-    }
-};
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
 
-game();
+// sets variables for buttons
+
+const roundDiv = document.querySelector(".round");
+const counterDiv = document.querySelector(".counter");
+const playedDiv = document.querySelector(".played");
+const winDiv = document.querySelector(".wl");
+
+// sets variables for divs
+
+var roundsPlayed = 0;
+
+counterDiv.textContent = `You have won ${counter} times!`;
+playedDiv.textContent = `You have played ${roundsPlayed} times!`;
+
+
+rock.addEventListener("click", function(){
+    ++roundsPlayed;
+    roundDiv.textContent= rps("rock");
+    counterDiv.textContent = `You have won ${counter} times!`;
+    playedDiv.textContent = `You have played ${roundsPlayed} times!`;
+})
+
+paper.addEventListener("click", function(){
+    ++roundsPlayed;
+    roundDiv.textContent= rps("paper");
+    counterDiv.textContent = `You have won ${counter} times!`;
+    playedDiv.textContent = `You have played ${roundsPlayed} times!`;
+})
+
+scissors.addEventListener("click", function(){
+    ++roundsPlayed;
+    roundDiv.textContent= rps("scissors");
+    counterDiv.textContent = `You have won ${counter} times!`;
+    playedDiv.textContent = `You have played ${roundsPlayed} times!`;
+})  
+
+if (roundsPlayed === 5) {
+    if (counter >= 3) {
+        winDiv.textContent = `You have won ${counter} times out of 5, making you the ultimate victor`;
+    } else {
+        winDiv.textContent = `You have only won ${counter} times out of 5, which makes you a big loser cry baby`;
+    }
+    rock.removeEventListener("click");
+    paper.removeEventListener("click");
+    scissors.removeEventListener("click");
+}
+
+
+
+// function game() {
+//     for (let i = 0; i < 5; i++) {
+//         console.log(rps());
+//         console.log(counter);
+//     }
+// };
+
