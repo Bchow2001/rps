@@ -72,6 +72,7 @@ function rps(playerSelection, computerSelection) {
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
+const refresh = document.querySelector("#refresh");
 
 // sets variables for buttons
 
@@ -82,43 +83,66 @@ const winDiv = document.querySelector(".wl");
 
 // sets variables for divs
 
-var roundsPlayed = 0;
+
 
 counterDiv.textContent = `You have won ${counter} times!`;
 playedDiv.textContent = `You have played ${roundsPlayed} times!`;
 
 
-rock.addEventListener("click", function(){
+
+var roundsPlayed = 0;
+
+function winCon() {
+    if (roundsPlayed === 5) {
+        
+        if (counter >= 3) {
+            winDiv.textContent = `You have won ${counter} times out of 5, making you the victor`;
+        } else {
+            winDiv.textContent = `You have only won ${counter} times out of 5, which makes you a loser`;
+        }
+        rock.remove();
+        paper.remove();
+        scissors.remove();
+        counterDiv.remove();
+        playedDiv.remove();
+    }
+}
+
+function rockChoice() {
     ++roundsPlayed;
     roundDiv.textContent= rps("rock");
     counterDiv.textContent = `You have won ${counter} times!`;
     playedDiv.textContent = `You have played ${roundsPlayed} times!`;
-})
+    winCon();
+}
 
-paper.addEventListener("click", function(){
+function paperChoice() {
     ++roundsPlayed;
     roundDiv.textContent= rps("paper");
     counterDiv.textContent = `You have won ${counter} times!`;
     playedDiv.textContent = `You have played ${roundsPlayed} times!`;
-})
+    winCon();
+}
 
-scissors.addEventListener("click", function(){
+function scissorsChoice() {
     ++roundsPlayed;
     roundDiv.textContent= rps("scissors");
     counterDiv.textContent = `You have won ${counter} times!`;
     playedDiv.textContent = `You have played ${roundsPlayed} times!`;
-})  
-
-if (roundsPlayed === 5) {
-    if (counter >= 3) {
-        winDiv.textContent = `You have won ${counter} times out of 5, making you the ultimate victor`;
-    } else {
-        winDiv.textContent = `You have only won ${counter} times out of 5, which makes you a big loser cry baby`;
-    }
-    rock.removeEventListener("click");
-    paper.removeEventListener("click");
-    scissors.removeEventListener("click");
+    winCon();
 }
+
+rock.addEventListener("click", rockChoice)
+
+paper.addEventListener("click", paperChoice)
+
+scissors.addEventListener("click", scissorsChoice)
+
+refresh.addEventListener("click", function(){
+    window.location.reload();
+})
+
+
 
 
 
